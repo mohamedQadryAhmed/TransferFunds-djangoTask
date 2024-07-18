@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer Funds</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        select, input[type="number"], input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transfer Funds</h1>
+        {% if error_message %}
+            <div class="error-message">{{ error_message }}</div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="from_account">From Account:</label>
+            <select name="from_account" id="from_account" required>
+                {% for account in accounts %}
+                    <option value="{{ account.id }}" {% if from_account and from_account.id == account.id %}selected{% endif %}>{{ account.name }} - {{ account.balance }}</option>
+                {% endfor %}
+            </select>
+            <label for="to_account">To Account:</label>
+            <select name="to_account" id="to_account" required>
+                {% for account in accounts %}
+                    <option value="{{ account.id }}">{{ account.name }} - {{ account.balance }}</option>
+                {% endfor %}
+            </select>
+            <label for="amount">Amount:</label>
+            <input type="number" name="amount" id="amount" step="0.01" required>
+            <input type="submit" value="Transfer">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .detail-item {
+            margin-bottom: 20px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Account Detail</h1>
+        <div class="detail-item">
+            <strong>ID:</strong> {{ account.id }}
+        </div>
+        <div class="detail-item">
+            <strong>Name:</strong> {{ account.name }}
+        </div>
+        <div class="detail-item">
+            <strong>Balance:</strong> {{ account.balance }}
+        </div>
+        <a href="{% url 'list_accounts' %}" class="back-link">Back to Account List</a>
+    </div>
+</body>
+</html>
